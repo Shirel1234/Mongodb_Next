@@ -36,44 +36,4 @@ export async function POST(request: NextRequest){
     }
 }
 
-export async function DELETE(
-    req: NextRequest,
-    { params }: { params: { id: string } }
-  ) {
-    await connect();
-    const { id } = params;
-    try {
-      const deletedBook = await Book.findByIdAndDelete(id);
-      if (!deletedBook) {
-        return NextResponse.json({ error: "Book not found" }, { status: 404 });
-      }
-      return NextResponse.json(
-        { message: "Book deleted successfully" },
-        { status: 201 }
-      );
-    } catch (error) {
-      return NextResponse.json("Error in deleting book" + error);
-    }
-  }
-  
-  export async function PUT(request: NextRequest, { params }: { params: { id: string } }
-  ) {
-    await connect();
-    const { id } = params;
-    const { title, author, rating } =  await request.json();
-    try {
-      const updateBook = await Book.findByIdAndUpdate(id,
-          { title, author, rating }, 
-          { new: true, runValidators: true } 
-      );
-      if (!updateBook) {
-        return NextResponse.json({ error: "Book not found" }, { status: 404 });
-      }
-      return NextResponse.json(
-        { message: "Book updated successfully" , book: updateBook},
-        { status: 201 }
-      );
-    } catch (error) {
-      return NextResponse.json("Error in updating book" + error);
-    }
-  }
+

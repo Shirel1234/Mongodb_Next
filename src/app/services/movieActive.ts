@@ -3,7 +3,7 @@ import axios from "axios";
 export const getMovies=async()=>{
   try{
     const response = await axios.get('/api/movie');
-    const data = response.data;
+    const data = response.data.movies;
     return data;
   }catch(error){
     console.error('Error get movies:', error);
@@ -23,7 +23,7 @@ export const createMovie=async(movie:{title: string; director:string; releaseYea
 
   export const updateMovie=async(id: string, movie:{title: string; director:string; releaseYear:string})=>{
     try{
-      const response = await axios.put(`/api/movie${id}`, movie);
+      const response = await axios.put(`/api/movie/${id}`, movie);
       const data = response.data;
       console.log('Movie updated:', data);
       return data;

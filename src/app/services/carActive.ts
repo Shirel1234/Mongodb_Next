@@ -3,14 +3,14 @@ import axios from "axios";
 export const getCars=async()=>{
   try{
     const response = await axios.get('/api/car');
-    const data = response.data;
+    const data = response.data.cars;
     return data;
   }catch(error){
     console.error('Error get cars:', error);
   }
 }
 
-export const createCar=async(car:{make: string; model:string; year:string})=>{
+export const createCar=async(car:{make: string; model_car:string; year:string})=>{
     try{
       const response = await axios.post('/api/car', car);
       const data = response.data;
@@ -21,9 +21,9 @@ export const createCar=async(car:{make: string; model:string; year:string})=>{
     }
   }
 
-  export const updateCar=async(id: string, car:{make: string; model:string; year:string})=>{
+  export const updateCar=async(id: string, car:{make: string; model_car:string; year:string})=>{
     try{
-      const response = await axios.put(`/api/car${id}`, car);
+      const response = await axios.put(`/api/car/${id}`, car);
       const data = response.data;
       console.log('Car updated:', data);
       return data;

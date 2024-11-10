@@ -22,12 +22,15 @@ const Page = () => {
   }, []);
 
   const handleCreate = async(bookData: IBook) => {
-    const newBook = await createBook(bookData);
-    setBooks((prevBooks) => [...prevBooks, newBook]);
+    await createBook(bookData);
+    const updatedBooks = await getBooks();
+    setBooks(updatedBooks);
   };
 
-  const handleUpdate = (id: string, bookData: IBook) => {
-    updateBook(id, bookData);
+  const handleUpdate = async(id: string, bookData: IBook) => {
+    await updateBook(id, bookData);
+    const updatedBooks = await getBooks();
+    setBooks(updatedBooks);
   };
 
   const handleDelete = (id: string) => {

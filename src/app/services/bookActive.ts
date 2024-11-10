@@ -14,7 +14,7 @@ export const getBooks=async()=>{
 export const createBook=async(book:{title: string; author:string; rating:number})=>{
     try{
       const response = await axios.post('/api/book', book);
-      const data = response.data;
+      const data = response.data.book;
       console.log('Book created:', data);
       return data;
     }catch(error){

@@ -15,8 +15,8 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   try {
     await connect();
-    const { make, model, year } = await request.json();
-    const existingCar = await Car.findOne({ make, model, year });
+    const { make, model_car, year } = await request.json();
+    const existingCar = await Car.findOne({ make, model_car, year });
 
     if (existingCar) {
       return NextResponse.json(
@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
         { status: 409 }
       );
     }
-    const newCar = new Car({ make, model, year });
+    const newCar = new Car({ make, model_car, year });
     await newCar.save();
 
     return NextResponse.json(
@@ -36,44 +36,4 @@ export async function POST(request: NextRequest) {
   }
 }
 
-export async function DELETE(
-  req: NextRequest,
-  { params }: { params: { id: string } }
-) {
-  await connect();
-  const { id } = params;
-  try {
-    const deletedCar = await Car.findByIdAndDelete(id);
-    if (!deletedCar) {
-      return NextResponse.json({ error: "Car not found" }, { status: 404 });
-    }
-    return NextResponse.json(
-      { message: "Car deleted successfully" },
-      { status: 201 }
-    );
-  } catch (error) {
-    return NextResponse.json("Error in deleting car" + error);
-  }
-}
 
-export async function PUT(request: NextRequest, { params }: { params: { id: string } }
-) {
-  await connect();
-  const { id } = params;
-  const { make, model, year } =  await request.json();
-  try {
-    const updateCar = await Car.findByIdAndUpdate(id,
-        { make, model, year }, 
-        { new: true, runValidators: true } 
-    );
-    if (!updateCar) {
-      return NextResponse.json({ error: "Car not found" }, { status: 404 });
-    }
-    return NextResponse.json(
-      { message: "Car updated successfully" , car: updateCar},
-      { status: 201 }
-    );
-  } catch (error) {
-    return NextResponse.json("Error in updating car" + error);
-  }
-}

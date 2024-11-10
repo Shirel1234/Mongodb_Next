@@ -3,7 +3,7 @@ import mongoose, { Model, Schema } from "mongoose";
 
 const CarSchema: Schema<ICar>=new Schema({
     make:{type: String, required: true},
-    model:{type: String, required: true, unique: true},
+    model_car:{type: String, required: true, unique: true},
     year: {type: String, required: true},
 })
 
