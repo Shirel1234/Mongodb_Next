@@ -7,8 +7,9 @@ export async function POST(request: NextRequest){
         await connect();
         const {username, email, password} = await request.json();
         const existingUser = await User.findOne({ username, email, password });
-
+        
         if (existingUser) {
+            console.log("isssssssssss", existingUser)
             return NextResponse.json(
               { message: "User with this username or email already exists" },
               { status: 409 }

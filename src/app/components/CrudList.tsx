@@ -14,11 +14,17 @@ function CrudList<T>({ items, onAdd, onUpdate, onDelete, fields, itemType }: Cru
   const [newItem, setNewItem] = useState([] as T);
   const [editingItem, setEditingItem] = useState<T | null>(null);
 
-  const handleInputChange = (key: keyof T, value: string, item?: T) => {
-    if (item) {
-      setEditingItem({ ...item, [key]: value });
+  const handleInputChange = (key: keyof T, value: string) => {
+    if (editingItem) {
+      setEditingItem((prevEditingItem) => ({
+        ...prevEditingItem,
+        [key]: value,
+      }));
     } else {
-      setNewItem({ ...newItem, [key]: value });
+      setNewItem((prevNewItem) => ({
+        ...prevNewItem,
+        [key]: value,
+      }));
     }
   };
 
@@ -62,7 +68,7 @@ function CrudList<T>({ items, onAdd, onUpdate, onDelete, fields, itemType }: Cru
                     <input
                       type="text"
                       value={(editingItem[field] as string) || ''}
-                      onChange={(e) => handleInputChange(field, e.target.value, item)}
+                      onChange={(e) => handleInputChange(field, e.target.value)}
                       className="border px-2 py-1"
                     />
                   ) : (

@@ -15,8 +15,8 @@ export default function HomeLayout({
 
     return (
         <div>
-        <div className='text-black flex justify-between bg-blue-300'>
-            <div className='flex items-center'>
+        <div className='text-black flex justify-between bg-purple-400'>
+            <div className='flex justify-center items-center'>
             </div>
             <div className=''>
                 {routes.map((route, index) => (

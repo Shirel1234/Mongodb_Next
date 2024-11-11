@@ -19,8 +19,8 @@ const Login = ({
         funUser({ username, email, password });
     }
     return (
-        <div>
-            <div className='w-[300px] h-[300px] flex flex-col items-center gap-5 bg-gray-300'>
+        <div className='flex justify-center p-10'>
+            <div className='w-[300px] h-[300px] flex flex-col items-center rounded border gap-5 bg-gray-300'>
                 <h1 className='text-2xl font-bold mb-4'>{title}</h1>
                 <input
                     type="text"

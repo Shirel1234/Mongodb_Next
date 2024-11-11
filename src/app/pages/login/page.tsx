@@ -11,6 +11,7 @@ const Page = () => {
 
     const handleCheckUser = async(userData: IUser) => {
        const response= await checkUser(userData);
+       console.log("gooood", response.success)
        if (response.success) {
         setMessage(response.message);  
         setTimeout(() => {
@@ -23,7 +24,9 @@ const Page = () => {
     return (
         <div>
             <Login title="Login" btn="Sign in" funUser={handleCheckUser} />
+            <div className='flex justify-center'>
             {message && <p>{message}</p>} 
+            </div>
         </div>
     )
 }

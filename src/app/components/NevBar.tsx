@@ -10,7 +10,7 @@ const NevBar = () => {
 
   return (
     <div>
-      <nav className='text-white flex justify-between bg-blue-800'>
+      <nav className='text-white flex justify-between bg-purple-900'>
         <div className='flex items-center'>
           <h1 className='mx-5 text-xl'>  My Website</h1>
         </div>
